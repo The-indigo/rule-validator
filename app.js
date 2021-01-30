@@ -59,18 +59,7 @@ if(data===undefined){
         data: null
       })
 }
-//  const fieldReq=["field","condition","condition_value"]
-//  fieldReq.map(req=>{
-//      if(!(req in rule)){
-//         return res.status(400).json ( {
-//             message: ` fields ${req} are the required keys in the rule object.`,
-//             status: "error",
-//             data: null
-//           })
-//      }
-//  })
 
-//g
  if(!("field" in rule)){
     return res.status(400).json ( {
                     message: "field field is required.",
