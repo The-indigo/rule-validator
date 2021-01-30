@@ -92,7 +92,7 @@ if(!("condition_value" in rule)){
             })
         }
    
-//e
+
     if(!(typeof(data)==='object' || typeof(data)==='string' || (Array.isArray(data))) ){
         return res.status(400).json({
             message: "data should be either of a valid json object,an array or a string.",
@@ -190,13 +190,13 @@ if(typeof(rule.field!=='string')){
             if(fieldD!==NaN && typeof(data)=="string"){
                 
                 
-                if(rule.condition==='eq' && data.indexOf(rule.condition_value)===rule.condition_value){
+                if(rule.condition==='eq' && data.charAt(fieldD)===rule.condition_value){
                     return res.status(200).json(success)
-                }else if(rule.condition==='eq' && data.indexOf(rule.condition_value)!==fieldD){
+                }else if(rule.condition==='eq' && data.charAt(fieldD)!==rule.condition_value){
                     return res.status(400).json(error)
-                }else if(rule.condition==='neq' && data.indexOf(rule.condition_value)!==fieldD){
+                }else if(rule.condition==='neq' && data.charAt(fieldD)!==rule.condition_value){
                     return res.status(200).json(success)
-                }else if(rule.condition==='neq' && data.indexOf(rule.condition_value)==fieldD){
+                }else if(rule.condition==='neq' && data.charAt(fieldD)==rule.condition_value){
                     return res.status(400).json(error)
                 }else if(rule.condition==='gt' && data.charAt(fieldD)>rule.condition_value){
                     return res.status(200).json(success)
@@ -207,8 +207,10 @@ if(typeof(rule.field!=='string')){
                 }else if(rule.condition==='gte' && !(data.charAt(fieldD)>=rule.condition_value)){
                     return res.status(400).json(error)
                 }else if(rule.condition==='contains' && data.includes(rule.condition_value)){
+                    success.data.validation.field_value=data
                     return res.status(200).json(success)
                 }else if(rule.condition==='contains' && !(data.includes(rule.condition_value))){
+                    error.data.validation.field_value=data
                     return res.status(400).json(error)
                 }
             }
